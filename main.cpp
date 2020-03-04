@@ -14,23 +14,6 @@ const Real lambda = 1.0;
 const Real n = 10;
 const size_t max_iter = 1000;
 
-Eigen::Matrix<Real, 10, 1> soft_threshold(Eigen::Matrix<Real, 10, 1> xs) {
-    const Real threshold = lambda / rho;
-
-    Eigen::Matrix<Real, 10, 1> rs;
-    for (int i=0; i<10; i++) {
-        Real x = xs[i];
-        if (x > threshold) {
-            rs[i] = x - threshold;
-        } else if (-threshold <= x && x <= threshold) {
-            rs[i] = 0;
-        } else {
-            rs[i] = -x + threshold;
-        }
-    }
-    return xs;
-}
-
 void soft_threshold(Real threshold, Eigen::VectorXd& x) {
     for(int i=0; i<dim; i++) {
         if (x(i) > threshold) {
