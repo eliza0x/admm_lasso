@@ -2,13 +2,16 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "lib/eigen-eigen-323c052e1731/Eigen/Core"
-#include "lib/eigen-eigen-323c052e1731/Eigen/LU"
+#include <Eigen/Core>
+#include <Eigen/LU>
 
 using Real = double;
 
+const std::string dataset_path = "/home/eliza/Project/admm_lasso/dataset.dat";
+const std::string ans_path = "/home/eliza/Project/admm_lasso/ans.dat";
 const size_t data_size = 506;
 const size_t dim = 13;
+
 const Real rho= 1.0;
 const Real lambda = 1.0;
 const Real n = 10;
@@ -55,7 +58,7 @@ int main() {
     Eigen::VectorXd zeros(dim); zeros.setZero();
 
     // 説明変数の読み込み
-    std::ifstream data("/home/eliza/Project/admm_lasso/dataset.csv");
+    std::ifstream data(dataset_path);
     for(int i=0; i<data_size; i++) {
         std::string line; getline(data, line);
         auto cnt = 0;
@@ -64,7 +67,7 @@ int main() {
     }
 
     // 目的変数の読み込み
-    std::ifstream target("/home/eliza/Project/admm_lasso/ans.csv");
+    std::ifstream target(ans_path);
     for(int i=0; i<data_size; i++) {
         std::string line;
         getline(target, line);
